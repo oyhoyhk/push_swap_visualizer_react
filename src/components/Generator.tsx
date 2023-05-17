@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
 import { createRandomNumber } from "../funcs";
 
 const Generator = ({
@@ -9,8 +8,6 @@ const Generator = ({
   count: number;
   handleInputChange: React.ChangeEventHandler;
 }) => {
-  const [numbers, setNumbers] = useState("");
-
   const clickCopyNumbers = () => {
     const str = createRandomNumber(count);
     navigator.clipboard
@@ -36,7 +33,7 @@ const Generator = ({
           />
         </InputContainer>
         <ButtonContainer>
-          <Button>복사하기</Button>
+          <Button onClick={clickCopyNumbers}>복사하기</Button>
         </ButtonContainer>
       </Container>
     </GeneratorStyled>

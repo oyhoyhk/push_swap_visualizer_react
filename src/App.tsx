@@ -3,6 +3,7 @@ import * as React from "react";
 import { useState } from "react";
 import Generator from "./components/Generator";
 import ReadFile from "./components/ReadFile";
+import Visualizer from "./components/Visualizer";
 
 const App = () => {
   const [count, setCount] = useState(500);
@@ -18,6 +19,7 @@ const App = () => {
       <Header>Push Swap Visualizer</Header>
       <Generator count={count} handleInputChange={handleInputChange} />
       <ReadFile />
+      <Visualizer />
     </Container>
   );
 };
