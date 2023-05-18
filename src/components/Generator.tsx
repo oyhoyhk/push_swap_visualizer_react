@@ -82,7 +82,8 @@ const GeneratorStyled = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin-top: 30px;
+  margin: 0 auto;
+  margin-top: 50px;
 `;
 
 export default Generator;

@@ -1,14 +1,10 @@
 :root {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
   margin: 0;
   padding: 0;
   background: #343434;
   color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   font-family: "Oswald", sans-serif;
+  overflow-x: hidden;
 }

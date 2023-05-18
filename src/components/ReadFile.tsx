@@ -4,7 +4,6 @@ import { useState } from "react";
 const ReadFile = () => {
   const [file, setFile] = useState<any>(null);
 
-  console.log(file);
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];
@@ -56,6 +55,7 @@ const ReadFileContainer = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 `;
 
 export default ReadFile;
