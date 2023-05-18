@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useEffect, useRef } from "react";
 import { colorChange } from "../funcs";
 
-const Stack = ({ stack }: { stack: number[] }) => {
+const Stack = ({ stack, count }: { stack: number[]; count: number }) => {
   const canvas = useRef<HTMLCanvasElement | null>(null);
   const conRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -15,14 +15,21 @@ const Stack = ({ stack }: { stack: number[] }) => {
     const TOTAL_HEIGHT = Math.floor(
       canvas.current.getBoundingClientRect().height
     );
-    const HEIGHT = Math.floor(TOTAL_HEIGHT / stack.length);
-
+    const HEIGHT = Math.round(TOTAL_HEIGHT / count);
+    if (conRef.current) {
+      ctx.clearRect(
+        0,
+        0,
+        conRef.current.getBoundingClientRect().width,
+        conRef.current.getBoundingClientRect().height
+      );
+    }
     ctx.beginPath();
     const start = [255, 0, 0];
     const end = [0, 0, 255];
     for (let i = 0; i < stack.length; i++) {
-      const width = Math.floor((stack[i] / stack.length) * TOTAL_WIDTH * 0.95);
-      const color = colorChange(start, end, stack[i], stack.length);
+      const width = Math.round((stack[i] / count) * TOTAL_WIDTH * 0.95);
+      const color = colorChange(start, end, stack[i], count);
       ctx.fillStyle = color;
       ctx.fillRect(0, TOTAL_HEIGHT - HEIGHT * (i + 1), width + 2, HEIGHT);
     }
@@ -46,13 +53,12 @@ const Stack = ({ stack }: { stack: number[] }) => {
   );
 };
 
-const Canvas = styled.canvas`
-  background: black;
-`;
+const Canvas = styled.canvas``;
 
 const StackContainer = styled.div`
-  width: 47%;
+  width: 37%;
   height: 100%;
+  background: black;
 `;
 
 export default Stack;

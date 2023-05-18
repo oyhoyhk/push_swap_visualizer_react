@@ -29,7 +29,7 @@ const ReadFile = () => {
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
-        이 곳으로 파일을 끌어다 올려주세요.
+        이 곳으로 명령어 목록을 끌어다 올려주세요.
         <AddIcon />
       </ReadFileContainer>
       <input style={{ display: "none" }} type="file" id="file" />
