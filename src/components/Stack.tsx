@@ -15,7 +15,7 @@ const Stack = ({ stack, count }: { stack: number[]; count: number }) => {
     const TOTAL_HEIGHT = Math.floor(
       canvas.current.getBoundingClientRect().height
     );
-    const HEIGHT = Math.round(TOTAL_HEIGHT / count);
+    const HEIGHT = Math.floor(TOTAL_HEIGHT / count);
     if (conRef.current) {
       ctx.clearRect(
         0,
@@ -26,14 +26,14 @@ const Stack = ({ stack, count }: { stack: number[]; count: number }) => {
     }
     ctx.beginPath();
     const start = [255, 0, 0];
-    const end = [0, 0, 255];
+    const end = [255, 255, 0];
     for (let i = 0; i < stack.length; i++) {
       const width = Math.round((stack[i] / count) * TOTAL_WIDTH * 0.95);
       const color = colorChange(start, end, stack[i], count);
       ctx.fillStyle = color;
       ctx.fillRect(0, TOTAL_HEIGHT - HEIGHT * (i + 1), width + 2, HEIGHT);
     }
-  }, [stack]);
+  }, [count, stack]);
   return (
     <StackContainer ref={conRef}>
       <Canvas
@@ -58,7 +58,6 @@ const Canvas = styled.canvas``;
 const StackContainer = styled.div`
   width: 37%;
   height: 100%;
-  background: black;
 `;
 
 export default Stack;
