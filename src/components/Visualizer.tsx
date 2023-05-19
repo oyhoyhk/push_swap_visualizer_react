@@ -2,6 +2,16 @@ import styled from "@emotion/styled";
 import CommandSection from "./CommandSection";
 import Stack from "./Stack";
 import StackInfo from "./StackInfo";
+import KeyIcon from "./KeyIcon";
+
+const KeyMap = {
+    'key_w' : '속도 느리게',
+    'key_s' : '속도 빠르게',
+    'key_a' : '이전 명령어',
+    'key_d' : '다음 명령어',
+    'key_r' : '처음으로',
+    'key_space' : '시작 / 멈추기',
+}
 
 interface IProps {
     height: number;
@@ -41,6 +51,7 @@ const Visualizer = (props: IProps) => {
                 </InputContainer>
                 <CommandInfo>Command : <div>{props.cur}</div> / <div>{props.cmdCount}</div></CommandInfo>
             </Header>
+            <KeyInfo>{Object.entries(KeyMap).map(([key, value]) => <KeyIcon key={key} name={key} info={value}/>)}</KeyInfo>
             <CommandSection commands={props.commands} cur={props.cur}/>
             <StackContainer>
                 <Stack stack={props.stackA} count={props.count}/>
@@ -51,6 +62,16 @@ const Visualizer = (props: IProps) => {
         </VisualizerContainer>
     );
 };
+
+const KeyInfo = styled.div`
+  width :100%;
+  height:60px;
+  margin:15px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+`
+
 
 const InputContainer = styled.div`
   display: flex;

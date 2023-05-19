@@ -20,14 +20,16 @@ const CommandSection = ({
             case 1:
                 temp = ["", ...commands.slice(0, 4)];
                 break;
+            case last - 3:
+                temp = [...commands.slice(last - 2), " ", " "];
+                console.log(temp)
+                break;
+            case last - 2:
+                temp = [...commands.slice(last - 1), " " , " ", " "];
+                console.log(temp);
+                break;
             case last - 1:
-                temp = [...commands.slice(last - 3), ""];
-                break;
-            case last:
-                temp = [...commands.slice(last - 2), "", ""];
-                break;
-            case last + 1:
-                temp = [...commands.slice(last - 2), "", ""];
+                temp = [...commands.slice(last), " ", " ", " ", " "];
                 break;
             default:
                 temp = [...commands.slice(cur - 2, cur + 3)];

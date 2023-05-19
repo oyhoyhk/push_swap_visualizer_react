@@ -38,7 +38,7 @@ const App = () => {
                 setCmdIdx(cmdIdx + 1)
                 setStackA([...stackA]);
                 setStackB([...stackB]);
-                if (cmdIdx === commands.length) {
+                if (cmdIdx === commands.length-1) {
                     setPlaying(false);
                     clearTimeout(raqId.current);
                 }
