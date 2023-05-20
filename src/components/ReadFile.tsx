@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const ReadFile = () => {
+const ReadFile = ({ setCommands } : {setCommands : React.Dispatch<React.SetStateAction<string[]>>}) => {
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
@@ -11,6 +11,8 @@ const ReadFile = () => {
             if (!e.target) return;
             const fileContents = e.target.result;
             console.log(fileContents);
+            if (!fileContents) return;
+            setCommands(fileContents.toString().split('\n').map(el=>el.trim()));
         };
         reader.readAsText(droppedFile);
     };
@@ -26,7 +28,7 @@ const ReadFile = () => {
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
             >
-                이 곳으로 명령어 목록을 끌어다 올려주세요.
+                Click or Drag your push_swap result
                 <AddIcon/>
             </ReadFileContainer>
             <input style={{display: "none"}} type="file" id="file"/>

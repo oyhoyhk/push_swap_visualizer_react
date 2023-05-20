@@ -63,7 +63,7 @@ export const doReverseOperation = (cmd: string, left: number[], right: number[])
             tmp = left.pop() as number;
             left.unshift(tmp);
             break;
-        case "rbb":
+        case "rrb":
             tmp = right.pop() as number;
             right.unshift(tmp);
             break;
@@ -165,7 +165,7 @@ export const doOperation = (cmd: string, left: number[], right: number[]) => {
     }
 };
 
-export const commands = `pb
+export const dummyCommands = `pb
 rb
 pb
 rb

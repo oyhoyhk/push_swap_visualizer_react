@@ -4,7 +4,7 @@ import {useState, useRef, useEffect} from "react";
 import Generator from "./components/Generator";
 import ReadFile from "./components/ReadFile";
 import Visualizer from "./components/Visualizer";
-import {commands, createRandomNumber, doOperation, doReverseOperation} from "./funcs";
+import { createRandomNumber, doOperation, doReverseOperation} from "./funcs";
 
 const CONTAINER_WIDTH = 900;
 const CONTAINER_HEIGHT = 750;
@@ -14,22 +14,20 @@ const COUNT = 500;
 
 const App = () => {
     const [count, setCount] = useState(COUNT);
+    const [origin, setOrigin] = useState<number[]>([]);
     const [stackA, setStackA] = useState<number[]>([]);
     const [stackB, setStackB] = useState<number[]>([]);
     const [playing, setPlaying] = useState(false);
     const raqId = useRef(-1);
     const [cmdIdx, setCmdIdx] = useState(0);
     const [speed, setSpeed] = useState(1);
+    const [commands, setCommands] = useState<string[]>([]);
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (isNaN(Number(e.currentTarget.value))) {
-            setCount(COUNT);
             return;
         }
         setCount(Number(e.currentTarget.value));
     };
-    React.useEffect(() => {
-        setStackA(createRandomNumber(COUNT).split(" ").reverse().map(Number));
-    }, []);
 
     React.useEffect(() => {
         if (playing) {
@@ -48,7 +46,7 @@ const App = () => {
         return () => {
             clearTimeout(raqId.current);
         };
-    }, [speed, playing, stackA, stackB, cmdIdx]);
+    }, [commands, speed, playing, stackA, stackB, cmdIdx]);
     const handlePlaying = () => {
         setPlaying(!playing);
         if (cmdIdx === commands.length) {
@@ -61,7 +59,7 @@ const App = () => {
         setPlaying(false);
         setCmdIdx((0));
         setStackB([]);
-        setStackA(createRandomNumber(COUNT).split(" ").reverse().map(Number));
+        setStackA([...origin]);
     }
     const changeSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSpeed(Number(e.target.value));
@@ -100,7 +98,7 @@ const App = () => {
                 setPlaying(false);
                 setCmdIdx((0));
                 setStackB([]);
-                setStackA(createRandomNumber(COUNT).split(" ").reverse().map(Number));
+                setStackA([...origin]);
             }
         }
         document.body.addEventListener('keypress', handleKeyPress);
@@ -113,9 +111,9 @@ const App = () => {
     return (
         <Container>
             <Header>Push Swap Visualizer</Header>
-            <Generator count={count} handleInputChange={handleInputChange}/>
-            <ReadFile/>
-            <Visualizer
+            <Generator count={count} handleInputChange={handleInputChange} setStack={setStackA} setOrigin={setOrigin}/>
+            <ReadFile setCommands={setCommands}/>
+            {stackA.length + stackB.length > 0 && commands.length > 0 && <Visualizer
                 height={CONTAINER_HEIGHT}
                 totalWidth={CONTAINER_WIDTH}
                 width={STACK_WIDTH}
@@ -131,7 +129,7 @@ const App = () => {
                 speed={speed}
                 playing={playing}
                 clickReset={clickReset}
-            />
+            />}
         </Container>
     );
 };

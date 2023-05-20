@@ -4,12 +4,19 @@ import { createRandomNumber } from "../funcs";
 const Generator = ({
   count,
   handleInputChange,
+  setStack,
+  setOrigin
 }: {
   count: number;
   handleInputChange: React.ChangeEventHandler;
+  setStack: React.Dispatch<React.SetStateAction<number[]>>
+  setOrigin : React.Dispatch<React.SetStateAction<number[]>>
 }) => {
   const clickCopyNumbers = () => {
     const str = createRandomNumber(count);
+    const list =str.split(' ').map(Number).reverse();
+    setStack([...list]);
+    setOrigin([...list]);
     navigator.clipboard
       .writeText(str)
       .then(() => {
@@ -24,7 +31,7 @@ const Generator = ({
     <GeneratorStyled>
       <Container>
         <InputContainer>
-          <label htmlFor="count">난수 개수 : </label>
+          <label htmlFor="count">Number of Random Numbers : </label>
           <Input
             type="text"
             id="count"
@@ -33,7 +40,7 @@ const Generator = ({
           />
         </InputContainer>
         <ButtonContainer>
-          <Button onClick={clickCopyNumbers}>복사하기</Button>
+          <Button onClick={clickCopyNumbers}>Copy in Clipboard</Button>
         </ButtonContainer>
       </Container>
     </GeneratorStyled>
