@@ -4,7 +4,8 @@ import {useState, useRef, useEffect} from "react";
 import Generator from "./components/Generator";
 import ReadFile from "./components/ReadFile";
 import Visualizer from "./components/Visualizer";
-import { createRandomNumber, doOperation, doReverseOperation} from "./funcs";
+import {createRandomNumber, doOperation, doReverseOperation} from "./funcs";
+import Introduction from "./components/Introduction";
 
 const CONTAINER_WIDTH = 900;
 const CONTAINER_HEIGHT = 750;
@@ -36,7 +37,7 @@ const App = () => {
                 setCmdIdx(cmdIdx + 1)
                 setStackA([...stackA]);
                 setStackB([...stackB]);
-                if (cmdIdx === commands.length-1) {
+                if (cmdIdx === commands.length - 1) {
                     setPlaying(false);
                     clearTimeout(raqId.current);
                 }
@@ -67,6 +68,7 @@ const App = () => {
 
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {
+            if (origin.length === 0 || commands.length === 0) return;
             if (e.key === 'a' || e.key === 'A') {
                 // 뒤로
                 if (playing) setPlaying(false);
@@ -107,11 +109,12 @@ const App = () => {
             document.body.removeEventListener('keypress', handleKeyPress);
         }
     })
-
     return (
         <Container>
             <Header>Push Swap Visualizer</Header>
-            <Generator count={count} handleInputChange={handleInputChange} setStack={setStackA} setOrigin={setOrigin}/>
+            {(stackA.length + stackB.length === 0 || commands.length === 0) && <Introduction/>}
+            <Generator origin={origin} count={count} handleInputChange={handleInputChange} setStack={setStackA}
+                       setOrigin={setOrigin} setCommands={setCommands}/>
             <ReadFile setCommands={setCommands}/>
             {stackA.length + stackB.length > 0 && commands.length > 0 && <Visualizer
                 height={CONTAINER_HEIGHT}
@@ -144,7 +147,7 @@ const Container = styled.div`
 const Header = styled.div`
   font-size: 2.5rem;
   text-align: center;
-  margin: 50px;
+  margin: 0 50px 25px 50px;
 `;
 
 export default App;

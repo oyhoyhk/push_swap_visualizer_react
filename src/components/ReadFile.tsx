@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-const ReadFile = ({ setCommands } : {setCommands : React.Dispatch<React.SetStateAction<string[]>>}) => {
+const ReadFile = ({setCommands}: { setCommands: React.Dispatch<React.SetStateAction<string[]>> }) => {
 
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
@@ -12,7 +12,7 @@ const ReadFile = ({ setCommands } : {setCommands : React.Dispatch<React.SetState
             const fileContents = e.target.result;
             console.log(fileContents);
             if (!fileContents) return;
-            setCommands(fileContents.toString().split('\n').map(el=>el.trim()));
+            setCommands(fileContents.toString().split('\n').map(el => el.trim()));
         };
         reader.readAsText(droppedFile);
     };
@@ -46,7 +46,7 @@ const AddIcon = styled.div`
 const ReadFileContainer = styled.label`
   font-size: 1.5rem;
   width: 570px;
-  height: 120px;
+  height: 80px;
   border: 2px solid white;
   border-radius: 10px;
   cursor: pointer;

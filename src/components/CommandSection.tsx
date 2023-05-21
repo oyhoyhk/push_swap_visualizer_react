@@ -9,10 +9,8 @@ const CommandSection = ({
     cur: number;
 }) => {
     const [arr, setArr] = useState<string[]>([]);
-
     useEffect(() => {
         let temp;
-        const last = commands.length - 1;
         switch (cur) {
             case 0:
                 temp = ["", "", ...commands.slice(0, 3)];
@@ -20,16 +18,14 @@ const CommandSection = ({
             case 1:
                 temp = ["", ...commands.slice(0, 4)];
                 break;
-            case last - 3:
-                temp = [...commands.slice(last - 2), " ", " "];
-                console.log(temp)
+            case commands.length:
+                temp = [...commands.slice(commands.length - 2), " ", " ", " "];
                 break;
-            case last - 2:
-                temp = [...commands.slice(last - 1), " " , " ", " "];
-                console.log(temp);
+            case commands.length - 1:
+                temp = [...commands.slice(commands.length - 3), " ", " "];
                 break;
-            case last - 1:
-                temp = [...commands.slice(last), " ", " ", " ", " "];
+            case commands.length - 2:
+                temp = [...commands.slice(commands.length - 4), " "];
                 break;
             default:
                 temp = [...commands.slice(cur - 2, cur + 3)];
