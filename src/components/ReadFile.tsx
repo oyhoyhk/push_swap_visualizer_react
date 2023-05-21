@@ -12,7 +12,7 @@ const ReadFile = ({setCommands}: { setCommands: React.Dispatch<React.SetStateAct
             const fileContents = e.target.result;
             console.log(fileContents);
             if (!fileContents) return;
-            setCommands(fileContents.toString().split('\n').map(el => el.trim()));
+            setCommands(fileContents.toString().trim().split('\n').map(el => el.trim()));
         };
         reader.readAsText(droppedFile);
     };

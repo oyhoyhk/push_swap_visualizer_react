@@ -3,14 +3,15 @@ import CommandSection from "./CommandSection";
 import Stack from "./Stack";
 import StackInfo from "./StackInfo";
 import KeyIcon from "./KeyIcon";
+import ProgressBar from "./ProgressBar";
 
 const KeyMap = {
-    'key_w' : '속도 느리게',
-    'key_s' : '속도 빠르게',
-    'key_a' : '이전 명령어',
-    'key_d' : '다음 명령어',
-    'key_r' : '처음으로',
-    'key_space' : '시작 / 멈추기',
+    'key_w': 'slow down',
+    'key_s': 'speed up',
+    'key_a': 'prev command',
+    'key_d': 'next command',
+    'key_r': 'reset',
+    'key_space': 'start / pause',
 }
 
 interface IProps {
@@ -51,7 +52,9 @@ const Visualizer = (props: IProps) => {
                 </InputContainer>
                 <CommandInfo>Command : <div>{props.cur}</div> / <div>{props.cmdCount}</div></CommandInfo>
             </Header>
-            <KeyInfo>{Object.entries(KeyMap).map(([key, value]) => <KeyIcon key={key} name={key} info={value}/>)}</KeyInfo>
+            <KeyInfo>{Object.entries(KeyMap).map(([key, value]) => <KeyIcon key={key} name={key}
+                                                                            info={value}/>)}</KeyInfo>
+            <ProgressBar pos={props.cur / props.cmdCount * 100}/>
             <CommandSection commands={props.commands} cur={props.cur}/>
             <StackContainer>
                 <Stack stack={props.stackA} count={props.count}/>
@@ -64,12 +67,12 @@ const Visualizer = (props: IProps) => {
 };
 
 const KeyInfo = styled.div`
-  width :100%;
-  height:60px;
-  margin:15px 0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+  width: 100%;
+  height: 60px;
+  margin: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 
