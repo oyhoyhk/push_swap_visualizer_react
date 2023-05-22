@@ -6,6 +6,7 @@ import ReadFile from "./components/ReadFile";
 import Visualizer from "./components/Visualizer";
 import {createRandomNumber, doOperation, doReverseOperation} from "./funcs";
 import Introduction from "./components/Introduction";
+import Deque from "double-ended-queue";
 
 const CONTAINER_WIDTH = 900;
 const CONTAINER_HEIGHT = 750;
@@ -15,9 +16,9 @@ const COUNT = 500;
 
 const App = () => {
     const [count, setCount] = useState(COUNT);
-    const [origin, setOrigin] = useState<number[]>([]);
-    const [stackA, setStackA] = useState<number[]>([]);
-    const [stackB, setStackB] = useState<number[]>([]);
+    const [origin, setOrigin] = useState<Deque<number>>(new Deque([]));
+    const [stackA, setStackA] = useState<Deque<number>>(new Deque([]));
+    const [stackB, setStackB] = useState<Deque<number>>(new Deque([]));
     const [playing, setPlaying] = useState(false);
     const raqId = useRef(-1);
     const [cmdIdx, setCmdIdx] = useState(0);
@@ -35,8 +36,8 @@ const App = () => {
             raqId.current = setTimeout(() => {
                 doOperation(commands[cmdIdx], stackA, stackB);
                 setCmdIdx(cmdIdx + 1)
-                setStackA([...stackA]);
-                setStackB([...stackB]);
+                setStackA(new Deque(stackA.toArray()));
+                setStackB(new Deque(stackB.toArray()));
                 if (cmdIdx === commands.length - 1) {
                     setPlaying(false);
                     clearTimeout(raqId.current);
@@ -51,7 +52,7 @@ const App = () => {
     const handlePlaying = () => {
         setPlaying(!playing);
         if (cmdIdx === commands.length) {
-            setStackA(createRandomNumber(COUNT).split(" ").reverse().map(Number));
+            setStackA(new Deque(createRandomNumber(COUNT).split(" ").reverse().map(Number)));
             setCmdIdx(0);
         }
     };
@@ -59,8 +60,8 @@ const App = () => {
     const clickReset = () => {
         setPlaying(false);
         setCmdIdx((0));
-        setStackB([]);
-        setStackA([...origin]);
+        setStackB(new Deque());
+        setStackA(new Deque(origin.toArray()));
     }
     const changeSpeed = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSpeed(Number(e.target.value));
@@ -74,8 +75,8 @@ const App = () => {
                 if (playing) setPlaying(false);
                 if (cmdIdx > 0) {
                     doReverseOperation(commands[cmdIdx - 1], stackA, stackB);
-                    setStackA([...stackA]);
-                    setStackB([...stackB]);
+                    setStackA(new Deque(stackA.toArray()));
+                    setStackB(new Deque(stackB.toArray()));
                     setCmdIdx(cmdIdx - 1);
                 }
             } else if (e.key === 'd' || e.key === 'D') {
@@ -83,8 +84,8 @@ const App = () => {
                 if (playing) setPlaying(false);
                 if (cmdIdx < commands.length) {
                     doOperation(commands[cmdIdx], stackA, stackB);
-                    setStackA([...stackA]);
-                    setStackB([...stackB]);
+                    setStackA(new Deque(stackA.toArray()));
+                    setStackB(new Deque(stackB.toArray()));
                     setCmdIdx(cmdIdx + 1);
                 }
             } else if (e.key === 'w' || e.key === 'W') {
@@ -99,8 +100,8 @@ const App = () => {
             } else if (e.key === 'r' || e.key === 'R') {
                 setPlaying(false);
                 setCmdIdx((0));
-                setStackB([]);
-                setStackA([...origin]);
+                setStackB(new Deque());
+                setStackA(new  Deque(origin.toArray()));
             }
         }
         document.body.addEventListener('keypress', handleKeyPress);

@@ -1,20 +1,20 @@
 import styled from "@emotion/styled";
 import {useEffect, useState} from "react";
-
-const StackInfo = ({stack, name}: { stack: number[]; name: string }) => {
+import Deque from 'double-ended-queue'
+const StackInfo = ({stack, name}: { stack: Deque<number>; name: string }) => {
     const [top, setTop] = useState<number[]>([]);
     const [bottom, setBottom] = useState<number[]>([]);
 
     useEffect(() => {
         if (stack.length < 10) {
             const mid = Math.ceil(stack.length / 2);
-            setTop([...stack.slice(mid).reverse()]);
-            setBottom([...stack.slice(0, mid).reverse()]);
+            setTop([...stack.toArray().slice(mid).reverse()]);
+            setBottom([...stack.toArray().slice(0, mid).reverse()]);
 
 
         } else {
-            setTop([...stack.slice(stack.length - 5).reverse()]);
-            setBottom([...stack.slice(0, 5).reverse()])
+            setTop([...stack.toArray().slice(stack.length - 5).reverse()]);
+            setBottom([...stack.toArray().slice(0, 5).reverse()])
         }
     }, [stack])
     return (

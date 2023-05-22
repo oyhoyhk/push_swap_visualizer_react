@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import {createRandomNumber} from "../funcs";
 import {useState} from "react";
+import Deque from 'double-ended-queue'
 
 const Generator = ({
                        count,
@@ -12,15 +13,15 @@ const Generator = ({
                    }: {
     count: number;
     handleInputChange: React.ChangeEventHandler;
-    origin: number[];
-    setStack: React.Dispatch<React.SetStateAction<number[]>>;
-    setOrigin: React.Dispatch<React.SetStateAction<number[]>>;
+    origin: Deque<number>;
+    setStack:  React.Dispatch<React.SetStateAction<Deque<number>>>
+    setOrigin:  React.Dispatch<React.SetStateAction<Deque<number>>>
     setCommands: React.Dispatch<React.SetStateAction<string[]>>
 }) => {
 
     const [numberString, setNumberString] = useState('');
     const clickCopyNumbers = () => {
-        setStack([...origin]);
+        setStack(new Deque(origin.toArray()));
         navigator.clipboard
             .writeText(numberString)
             .catch((e) => {
@@ -32,9 +33,9 @@ const Generator = ({
         const str = createRandomNumber((count));
         const temp = str.split(' ').map(Number).reverse();
         setNumberString(str);
-        setOrigin([...temp]);
+        setOrigin(new Deque(temp));
         setCommands([]);
-        setStack([...temp]);
+        setStack(new Deque(temp));
     }
 
     return (
@@ -54,7 +55,7 @@ const Generator = ({
                 </ButtonContainer>
             </Container>
             {origin && <Container>
-                <NumberContainer>{origin.slice(0, 10).join(' ')} {origin.length > 10 ? '...' : ''}</NumberContainer>
+                <NumberContainer>{origin.toArray().slice(0, 10).join(' ')} {origin.length > 10 ? '...' : ''}</NumberContainer>
                 <ButtonContainer>
                     <Button onClick={clickCopyNumbers}>Copy in Clipboard</Button>
                 </ButtonContainer>

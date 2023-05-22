@@ -4,6 +4,7 @@ import Stack from "./Stack";
 import StackInfo from "./StackInfo";
 import KeyIcon from "./KeyIcon";
 import ProgressBar from "./ProgressBar";
+import Deque from 'double-ended-queue'
 
 const KeyMap = {
     'key_w': 'slow down',
@@ -18,8 +19,8 @@ interface IProps {
     height: number;
     totalWidth: number;
     width: number;
-    stackA: number[];
-    stackB: number[];
+    stackA: Deque<number>;
+    stackB: Deque<number>;
     handlePlaying: React.MouseEventHandler<HTMLDivElement>;
     count: number;
     cmdCount: number;
