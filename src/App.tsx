@@ -70,7 +70,7 @@ const App = () => {
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {
             if (origin.length === 0 || commands.length === 0) return;
-            if (e.key === 'a' || e.key === 'A') {
+            if (e.key === 'a' || e.key === 'A' || e.key === 'ㅁ') {
                 // 뒤로
                 if (playing) setPlaying(false);
                 if (cmdIdx > 0) {
@@ -79,7 +79,7 @@ const App = () => {
                     setStackB(new Deque(stackB.toArray()));
                     setCmdIdx(cmdIdx - 1);
                 }
-            } else if (e.key === 'd' || e.key === 'D') {
+            } else if (e.key === 'd' || e.key === 'D' || e.key === 'ㅇ') {
                 // 앞으로
                 if (playing) setPlaying(false);
                 if (cmdIdx < commands.length) {
@@ -88,16 +88,22 @@ const App = () => {
                     setStackB(new Deque(stackB.toArray()));
                     setCmdIdx(cmdIdx + 1);
                 }
-            } else if (e.key === 'w' || e.key === 'W') {
+            } else if (e.key === 'w' || e.key === 'W' || e.key === 'ㅈ') {
                 // 속도 빠르게
                 if (speed < 200) setSpeed(speed + 1);
-            } else if (e.key === 's' || e.key === 'S') {
+            } else if (e.key === 's' || e.key === 'S'  || e.key === 'ㄴ') {
                 // 속도 느리게
                 if (speed > 1) setSpeed(speed - 1);
             } else if (e.key === ' ') {
                 // playing, stop
-                setPlaying(!playing);
-            } else if (e.key === 'r' || e.key === 'R') {
+                if (playing) {
+                    setPlaying(false);
+                } else {
+                    setPlaying(true);
+                    if (cmdIdx === commands.length) setCmdIdx(0);
+                    setStackA(new Deque(origin.toArray()))
+                }
+            } else if (e.key === 'r' || e.key === 'R'  || e.key === 'ㄱ') {
                 setPlaying(false);
                 setCmdIdx((0));
                 setStackB(new Deque());

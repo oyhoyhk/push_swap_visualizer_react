@@ -30,6 +30,30 @@ const interpolate = (start: number, end: number, percent: number) => {
     return start + Math.round((end - start) * percent);
 };
 
+export const getAdjacentCommands = (cur :number, commands : string[]) => {
+    let temp:string[];
+    switch (cur) {
+        case 0:
+            temp = ["", "", ...commands.slice(0, 3)];
+            break;
+        case 1:
+            temp = ["", ...commands.slice(0, 4)];
+            break;
+        case commands.length:
+            temp = [...commands.slice(commands.length - 2), " ", " ", " "];
+            break;
+        case commands.length - 1:
+            temp = [...commands.slice(commands.length - 3), " ", " "];
+            break;
+        case commands.length - 2:
+            temp = [...commands.slice(commands.length - 4), " "];
+            break;
+        default:
+            temp = [...commands.slice(cur - 2, cur + 3)];
+    }
+    return temp;
+}
+
 export const doReverseOperation = (cmd: string, left: Deque<number>, right: Deque<number>) => {
     let tmp = -1;
     let tmp1 = -1;

@@ -1,86 +1,27 @@
 import styled from "@emotion/styled";
-import {useEffect, useState} from "react";
+import {useEffect, useRef} from "react";
 
-const CommandSection = ({
-                            commands,
-                            cur,
-                        }: {
-    commands: string[];
-    cur: number;
-}) => {
-    const [arr, setArr] = useState<string[]>([]);
+const CommandSection = ({ list }: { list: string[] })=> {
+    const canvas = useRef<HTMLCanvasElement | null>(null);
     useEffect(() => {
-        let temp;
-        switch (cur) {
-            case 0:
-                temp = ["", "", ...commands.slice(0, 3)];
-                break;
-            case 1:
-                temp = ["", ...commands.slice(0, 4)];
-                break;
-            case commands.length:
-                temp = [...commands.slice(commands.length - 2), " ", " ", " "];
-                break;
-            case commands.length - 1:
-                temp = [...commands.slice(commands.length - 3), " ", " "];
-                break;
-            case commands.length - 2:
-                temp = [...commands.slice(commands.length - 4), " "];
-                break;
-            default:
-                temp = [...commands.slice(cur - 2, cur + 3)];
+        if (!canvas.current) return;
+        const ctx = canvas.current.getContext('2d');
+        if (!ctx) return;
+        ctx.clearRect(0,0,900,50);
+        for(let i=0;i<list.length;i++) {
+            console.log(list[i]);
+            ctx.fillStyle = i === 2 ? 'white' : i === 1 || i === 3 ? '#cdcdcd' : '#676767'
+            ctx.font = '25px Oswald'
+            ctx.fillText(list[i], i / list.length * 900 + 90, 30);
         }
-        setArr(temp);
-    }, [commands, cur]);
+    }, [list]);
     return (
-        <CommandSectionContainer>
-            <Commands>
-                {arr.map((cmd, idx) => (
-                    <Cmd
-                        key={idx}
-                        className={
-                            idx === 0 || idx === 4 ? "edge" : idx === 2 ? "center" : ""
-                        }
-                    >
-                        {cmd}
-                    </Cmd>
-                ))}
-            </Commands>
-        </CommandSectionContainer>
+        <CommandSectionContainer ref={canvas} width='900px' height='50px'/>
     );
 };
 
-const Cmd = styled.div`
-  width: 10%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
 
-  &.edge {
-    color: #5b5b5b;
-  }
-
-  &.center {
-    font-weight: bold;
-    color: white;
-  }
-
-  color: #a0a0a0;
-`;
-
-const Commands = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const CommandSectionContainer = styled.div`
-  width: 100%;
-  height: 50px;
+const CommandSectionContainer = styled.canvas`
   overflow: hidden;
 `;
 

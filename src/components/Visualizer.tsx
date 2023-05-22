@@ -5,6 +5,7 @@ import StackInfo from "./StackInfo";
 import KeyIcon from "./KeyIcon";
 import ProgressBar from "./ProgressBar";
 import Deque from 'double-ended-queue'
+import {getAdjacentCommands} from "../funcs";
 
 const KeyMap = {
     'key_w': 'slow down',
@@ -55,8 +56,8 @@ const Visualizer = (props: IProps) => {
             </Header>
             <KeyInfo>{Object.entries(KeyMap).map(([key, value]) => <KeyIcon key={key} name={key}
                                                                             info={value}/>)}</KeyInfo>
-            <ProgressBar pos={props.cur / props.cmdCount * 100}/>
-            <CommandSection commands={props.commands} cur={props.cur}/>
+            <ProgressBar pos={props.cur / props.cmdCount}/>
+            <CommandSection list={getAdjacentCommands(props.cur, props.commands)}/>
             <StackContainer>
                 <Stack stack={props.stackA} count={props.count}/>
                 <StackInfo name="Stack A" stack={props.stackA}/>
