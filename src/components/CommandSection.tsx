@@ -9,7 +9,6 @@ const CommandSection = ({ list }: { list: string[] })=> {
         if (!ctx) return;
         ctx.clearRect(0,0,900,50);
         for(let i=0;i<list.length;i++) {
-            console.log(list[i]);
             ctx.fillStyle = i === 2 ? 'white' : i === 1 || i === 3 ? '#cdcdcd' : '#676767'
             ctx.font = '25px Oswald'
             ctx.fillText(list[i], i / list.length * 900 + 90, 30);

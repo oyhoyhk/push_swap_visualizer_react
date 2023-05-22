@@ -1,64 +1,50 @@
 import styled from "@emotion/styled";
-import {useEffect, useState} from "react";
+import {useEffect, useRef} from "react";
 import Deque from 'double-ended-queue'
+import {getStackInfo} from "../funcs";
 const StackInfo = ({stack, name}: { stack: Deque<number>; name: string }) => {
-    const [top, setTop] = useState<number[]>([]);
-    const [bottom, setBottom] = useState<number[]>([]);
+    const [top, bottom] = getStackInfo(stack);
+    const canvas = useRef<HTMLCanvasElement | null>(null);
 
     useEffect(() => {
-        if (stack.length < 10) {
-            const mid = Math.ceil(stack.length / 2);
-            setTop([...stack.toArray().slice(mid).reverse()]);
-            setBottom([...stack.toArray().slice(0, mid).reverse()]);
+        if (!canvas.current) return;
+        const ctx = canvas.current.getContext('2d');
+        if (!ctx) return;
+        ctx.clearRect(0,0,50,450);
+        ctx.font = "20px Oswald";
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = "white";
+        for(let i=0;i<top.length;i++) {
+            ctx.fillText(top[i].toString(), 25, i * 30 + 15);
+        }
 
+        for(let i=-1;i<2;i++) {
+            ctx.fillText(".",25, 225 + 30 * i)
+        }
 
-        } else {
-            setTop([...stack.toArray().slice(stack.length - 5).reverse()]);
-            setBottom([...stack.toArray().slice(0, 5).reverse()])
+        for(let i=0;i<bottom.length;i++) {
+            ctx.fillText(bottom[i].toString(), 25, 350 + i * 30 - 35);
         }
     }, [stack])
     return (
         <StackInfoContainer>
-            <Stack>
-                <Container>{top.map(num => <Element
-                    key={num}>{num}</Element>)}</Container>
-                <Container>
-                    <div>.</div>
-                    <div>.</div>
-                    <div>.</div>
-                </Container>
-                <Container>
-                    {bottom.map(num => <Element key={num}>{num}</Element>)}
-                </Container>
-            </Stack>
+            <Canvas ref={canvas} width={50} height={450}/>
             <Name>{name}</Name>
         </StackInfoContainer>
-    );
+);
 };
 
-const Container = styled.div`
+const Canvas = styled.canvas`
+  border-left:2px solid white;
+  border-right:2px solid white;
+  border-bottom:2px solid white;
 `
 
-const Name = styled.div`
-  font-size: 1rem;
-`;
-
-const Element = styled.div`
-
+const Name= styled.div`
+  margin-top:15px;
+    font-size:.9rem;
 `
-
-const Stack = styled.div`
-  border-left: 2px solid white;
-  border-right: 2px solid white;
-  border-bottom: 2px solid white;
-  width: 100%;
-  height: 90%;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-`;
 
 const StackInfoContainer = styled.div`
   width: 50px;
