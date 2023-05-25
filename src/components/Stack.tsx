@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import {useEffect, useRef} from "react";
-import {colorChange} from "../funcs";
-import Deque from 'double-ended-queue'
+import { useEffect, useRef } from "react";
+import { colorChange } from "../funcs";
+import Deque from "double-ended-queue";
 
 const Stack = ({ stack, count }: { stack: Deque<number>; count: number }) => {
   const canvas = useRef<HTMLCanvasElement | null>(null);
@@ -17,20 +17,20 @@ const Stack = ({ stack, count }: { stack: Deque<number>; count: number }) => {
     const TOTAL_HEIGHT = Math.floor(
       canvas.current.getBoundingClientRect().height
     );
-    const HEIGHT = Math.floor(TOTAL_HEIGHT / count);
+    const HEIGHT = count > 500 ? 1 : Math.floor(TOTAL_HEIGHT / count);
     if (conRef.current) {
       ctx.clearRect(
         0,
         0,
         conRef.current.getBoundingClientRect().width,
-        conRef.current.getBoundingClientRect().height
+        count > 500 ? count : conRef.current.getBoundingClientRect().height
       );
     }
     ctx.beginPath();
     const start = [255, 0, 0];
     const end = [255, 255, 0];
     for (let i = 0; i < stack.length; i++) {
-      const val = stack.get(i) as number
+      const val = stack.get(i) as number;
       const width = Math.round((val / count) * TOTAL_WIDTH * 0.95);
       ctx.fillStyle = colorChange(start, end, val, count);
       ctx.fillRect(0, TOTAL_HEIGHT - HEIGHT * (i + 1), width + 2, HEIGHT);
@@ -38,23 +38,17 @@ const Stack = ({ stack, count }: { stack: Deque<number>; count: number }) => {
   }, [canvas, count, stack, conRef]);
   return (
     <StackContainer ref={conRef}>
-      <canvas
-        ref={canvas}
-        width={
-          340
-        }
-        height={
-          530
-        }
-      />
+      <canvas ref={canvas} width={340} height={count > 500 ? count : 530} />
     </StackContainer>
   );
 };
 
-
 const StackContainer = styled.div`
   width: 340px;
   height: 530px;
+  & > canvas {
+    margin-bottom: 70px;
+  }
 `;
 
 export default Stack;

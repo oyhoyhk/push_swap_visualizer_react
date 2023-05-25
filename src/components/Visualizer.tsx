@@ -112,7 +112,7 @@ const Button = styled.div`
 `;
 
 const CommandInfo = styled.div`
-  width: 30%;
+  width: 35%;
   text-align: center;
   display: flex;
   align-items: center;
