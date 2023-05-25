@@ -11,7 +11,6 @@ import Deque from "double-ended-queue";
 const CONTAINER_WIDTH = 900;
 const CONTAINER_HEIGHT = 750;
 const STACK_WIDTH = 350;
-
 const COUNT = 500;
 
 const App = () => {
