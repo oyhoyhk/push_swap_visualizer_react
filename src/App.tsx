@@ -7,6 +7,7 @@ import Visualizer from "./components/Visualizer";
 import { createRandomNumber, doOperation, doReverseOperation } from "./funcs";
 import Introduction from "./components/Introduction";
 import Deque from "double-ended-queue";
+import Footer from "./Footer";
 
 const CONTAINER_WIDTH = 900;
 const CONTAINER_HEIGHT = 750;
@@ -155,6 +156,7 @@ const App = () => {
           setCmdIdx={setCmdIdx}
         />
       )}
+      <Footer />
     </Container>
   );
 };
