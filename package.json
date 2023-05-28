@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postbuild" : "react-snap"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -17,7 +18,8 @@
     "@vercel/analytics": "^1.0.1",
     "double-ended-queue": "^2.1.0-0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-snap": "^1.23.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
