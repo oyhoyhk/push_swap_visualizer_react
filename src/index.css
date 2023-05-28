@@ -1,10 +1,8 @@
 :root {
-  width: 100vw;
-  height: 100vh;
   margin: 0;
   padding: 0;
   background: #343434;
   color: white;
   font-family: "Oswald", sans-serif;
-  overflow: hidden;
+  overflow-x:hidden;
 }

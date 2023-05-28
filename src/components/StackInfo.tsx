@@ -5,11 +5,9 @@ import { getStackInfo } from "../funcs";
 const StackInfo = ({
   stack,
   name,
-  pos,
 }: {
   stack: Deque<number>;
   name: string;
-  pos: number;
 }) => {
   const [top, bottom] = getStackInfo(stack);
   const canvas = useRef<HTMLCanvasElement | null>(null);
@@ -36,7 +34,7 @@ const StackInfo = ({
     }
   }, [stack]);
   return (
-    <StackInfoContainer pos={pos}>
+    <StackInfoContainer>
       <Canvas ref={canvas} width={50} height={450} />
       <Name>{name}</Name>
     </StackInfoContainer>
@@ -54,7 +52,7 @@ const Name = styled.div`
   font-size: 0.9rem;
 `;
 
-const StackInfoContainer = styled.div<{ pos: number }>`
+const StackInfoContainer = styled.div`
   width: 50px;
   height: 100%;
   display: flex;
@@ -63,9 +61,6 @@ const StackInfoContainer = styled.div<{ pos: number }>`
   align-items: center;
   margin: 20px 0;
   font-size: 1.25rem;
-  position: fixed;
-  bottom: 5%;
-  left: ${({ pos }) => `${pos}%}`};
 `;
 
 export default StackInfo;

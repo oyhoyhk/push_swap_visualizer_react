@@ -71,8 +71,8 @@ const Visualizer = (props: IProps) => {
       <CommandSection list={getAdjacentCommands(props.cur, props.commands)} />
       <StackContainer>
         <Stack stack={props.stackA} count={props.count} />
-        <StackInfo name="Stack A" stack={props.stackA} pos={43} />
-        <StackInfo name="Stack B" stack={props.stackB} pos={51} />
+        <StackInfo name="Stack A" stack={props.stackA} />
+        <StackInfo name="Stack B" stack={props.stackB} />
         <Stack stack={props.stackB} count={props.count} />
       </StackContainer>
     </VisualizerContainer>
