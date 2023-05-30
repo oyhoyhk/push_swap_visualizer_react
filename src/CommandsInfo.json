@@ -1,0 +1,56 @@
+[
+  {
+    "name": "sa",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "sa.png"
+  },
+  {
+    "name": "sb",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "sb.png"
+  },
+  {
+    "name": "ss",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "ss.png"
+  },
+  {
+    "name": "ra",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "ra.png"
+  },
+  {
+    "name": "rb",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "rb.png"
+  },{
+  "name": "rr",
+  "description" : "Swap the position of the top element in stack A with the element below it.",
+  "pic": "rr.png"
+},
+  {
+    "name": "rra",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "rra.png"
+  },
+  {
+    "name": "rrb",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "rrb.png"
+  },
+  {
+    "name": "rrr",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "rrr.png"
+  },
+  {
+    "name": "pa",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "pa.png"
+  },
+  {
+    "name": "pb",
+    "description" : "Swap the position of the top element in stack A with the element below it.",
+    "pic": "pb.png"
+  }
+]

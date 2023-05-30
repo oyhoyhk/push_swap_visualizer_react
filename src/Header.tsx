@@ -5,13 +5,12 @@ const Header = () => {
   const location = useLocation();
   return (
     <HeaderContainer>
-      <div style={{ width: "20%" }} />
       <Title>Push Swap Visualizer</Title>
       <Link
         to={location.pathname === "/" ? "/description" : "/"}
         style={{ width: "20%", textAlign: "right" }}
       >
-        {location.pathname === "/" ? "Description" : "Home"}
+        {location.pathname === "/" ? "Go to Description" : "Go to Home"}
       </Link>
     </HeaderContainer>
   );
