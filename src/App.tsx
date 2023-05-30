@@ -122,7 +122,6 @@ const App = () => {
   });
   return (
     <Container>
-      <Header>Push Swap Visualizer</Header>
       {(stackA.length + stackB.length === 0 || commands.length === 0) && (
         <Introduction />
       )}
@@ -165,12 +164,6 @@ const Container = styled.div`
   width: 100vw;
   overflow: auto;
   margin: 0 auto;
-`;
-
-const Header = styled.div`
-  font-size: 2.5rem;
-  text-align: center;
-  margin: 0 50px 25px 50px;
 `;
 
 export default App;

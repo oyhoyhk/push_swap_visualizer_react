@@ -6,3 +6,8 @@
   font-family: "Oswald", sans-serif;
   overflow-x:hidden;
 }
+
+a {
+  text-decoration:none;
+  color:white;
+}
