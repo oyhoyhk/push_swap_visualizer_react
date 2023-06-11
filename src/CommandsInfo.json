@@ -1,56 +1,46 @@
 [
   {
     "name": "sa",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "sa.png"
+    "description": "Swap the top element of stack A with the element below it"
   },
   {
     "name": "sb",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "sb.png"
+    "description": "Swap the top element of stack B with the element below it"
   },
   {
     "name": "ss",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "ss.png"
+    "description": "Stack A, B. Swap the position of the top element and the bottom element respectively"
   },
   {
     "name": "ra",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "ra.png"
+    "description": "Move the top element of stack A to the bottom of the stack"
   },
   {
     "name": "rb",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "rb.png"
-  },{
-  "name": "rr",
-  "description" : "Swap the position of the top element in stack A with the element below it.",
-  "pic": "rr.png"
-},
+    "description": "Move the top element of stack B to the bottom of the stack"
+  },
+  {
+    "name": "rr",
+    "description": "Moves the topmost element of stacks A and B to the bottom of the stack."
+  },
   {
     "name": "rra",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "rra.png"
+    "description": "Moves the bottom element of stack A to the top of the stack"
   },
   {
     "name": "rrb",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "rrb.png"
+    "description": "Move the bottom element of stack B to the top of the stack"
   },
   {
     "name": "rrr",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "rrr.png"
+    "description": "Moves the bottommost element of stacks A and B to the top of the stack"
   },
   {
     "name": "pa",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "pa.png"
+    "description": "Moves the top element of stack B to the top of stack A"
   },
   {
     "name": "pb",
-    "description" : "Swap the position of the top element in stack A with the element below it.",
-    "pic": "pb.png"
+    "description": "Moves the top element of stack A to the top of stack B"
   }
 ]
