@@ -3,9 +3,9 @@ import App from "./App";
 import { inject } from "@vercel/analytics";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Description from "./Description";
 import Header from "./Header";
 import Footer from "./Footer";
+import Description from "./Description/Description";
 
 inject();
 
